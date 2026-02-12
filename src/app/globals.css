@@ -159,3 +159,59 @@ html, body {
 .damage-pop {
   animation: damage-pop 0.8s ease-out forwards;
 }
+
+/* Action bar */
+.action-bar {
+  background: linear-gradient(0deg, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.8) 100%);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0, 163, 255, 0.15);
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #1a2a40;
+  background: #0a1628;
+  color: #b0b0b0;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.action-btn:hover:not(:disabled) {
+  border-color: #00A3FF60;
+  color: #00A3FF;
+  background: #0a1a30;
+}
+.action-btn:active:not(:disabled) {
+  transform: scale(0.95);
+  background: #00A3FF20;
+}
+.action-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.action-btn-active {
+  border-color: #00A3FF;
+  color: #00A3FF;
+  background: #00A3FF15;
+}
+.action-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
