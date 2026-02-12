@@ -17,9 +17,16 @@ const AGENT_CONFIGS: Array<{ codename: AgentCodename; name: string }> = [
   { codename: 'rook', name: 'ROOK' },
 ];
 
-// In-memory game store
-const games: Map<string, GameState> = new Map();
-const sessionToGame: Map<string, { gameId: string; playerId: string }> = new Map();
+// In-memory game store — use globalThis to survive Next.js dev hot-reloads
+const globalAny = globalThis as Record<string, unknown>;
+if (!globalAny.__kma_games) {
+  globalAny.__kma_games = new Map<string, GameState>();
+}
+if (!globalAny.__kma_sessions) {
+  globalAny.__kma_sessions = new Map<string, { gameId: string; playerId: string }>();
+}
+const games = globalAny.__kma_games as Map<string, GameState>;
+const sessionToGame = globalAny.__kma_sessions as Map<string, { gameId: string; playerId: string }>;
 
 function createPlayer(id: string, name: string, type: 'human' | 'agent', codename?: AgentCodename): Player {
   return {
